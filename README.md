@@ -16,14 +16,14 @@ GitHub Pages: `https://yefei404.github.io/schedule-standings/`
 - **导入导出**：JSON 格式备份与恢复
 - **打印支持**：一键打印当前视图
 - **快捷键**：赛程模式下 Ctrl/Cmd + Enter 快速添加比赛
-- **iPad 桌面图标**：保存到主屏幕（icon 待补充）
+- **iPad 桌面图标**：保存到主屏幕时显示蓝色「8」图标
 
 ## 项目结构
 
 ```
 schedule-standings/
 ├── index.html      # 单文件应用（HTML + CSS + JS）
-├── icon.png        # iPad 主屏幕图标（待补充）
+├── icon.png        # iPad 主屏幕图标
 └── README.md
 ```
 
