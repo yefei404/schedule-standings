@@ -8,137 +8,99 @@
     <meta name="apple-mobile-web-app-title" content="赛程积分榜" />
     <link rel="apple-touch-icon" href="icon.png" />
     <link rel="icon" href="icon.png" />
-    <title>赛程表 & 积分榜（多小组）</title>
+    <title>赛程 · 积分 · 淘汰赛赛程</title>
     <style>
-        /* ===== 全局重置 & 基础 ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Segoe UI', 'PingFang SC', Roboto, sans-serif;
             background: #f0f4f9;
-            color: #1a2634;
-            padding: 30px 20px;
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, sans-serif;
+            padding: 24px 16px;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
         }
-
-        .app-container {
-            max-width: 1200px;
+        .app {
+            max-width: 1400px;
             width: 100%;
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
-            padding: 32px 36px 48px;
-            transition: all 0.2s;
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            padding: 28px 30px 40px;
         }
 
-        /* ===== 顶部 ===== */
+        /* header */
         .header {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 16px 20px;
+            gap: 16px 24px;
             margin-bottom: 18px;
-            padding-bottom: 14px;
+            padding-bottom: 16px;
             border-bottom: 2px solid #eef3f8;
         }
-
-        .tournament-title-area {
+        .title-area {
             display: flex;
             align-items: center;
             gap: 12px;
-            flex: 1 1 280px;
+            flex: 1 1 260px;
         }
-
-        .tournament-icon {
+        .title-area .icon {
             font-size: 28px;
-            line-height: 1;
         }
-
         .tournament-input {
             font-size: 24px;
             font-weight: 700;
             border: none;
             background: transparent;
             color: #1a2634;
-            padding: 4px 8px;
+            padding: 4px 10px;
             border-radius: 8px;
             width: 100%;
             min-width: 160px;
-            transition: background 0.2s;
-            letter-spacing: 0.5px;
         }
-
         .tournament-input:focus {
             outline: none;
             background: #f5f9ff;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
         }
-
-        .tournament-input::placeholder {
-            color: #b0c4db;
-            font-weight: 500;
-            font-size: 20px;
-        }
-
         .toolbar {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
             gap: 10px;
             margin-left: auto;
         }
-
         .btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 6px;
-            padding: 10px 20px;
+            padding: 8px 18px;
             border: none;
             border-radius: 12px;
-            font-size: 15px;
             font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: 0.2s;
             background: #f1f5f9;
             color: #1e293b;
             white-space: nowrap;
         }
-
         .btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
-
-        .btn:active {
-            transform: translateY(0);
-            box-shadow: none;
-        }
-
         .btn-primary {
             background: #2563eb;
             color: #fff;
         }
         .btn-primary:hover {
             background: #1d4ed8;
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.30);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
         }
-
-        .btn-danger {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-        .btn-danger:hover {
-            background: #fecaca;
-        }
-
         .btn-outline {
             background: transparent;
             border: 2px solid #dce4ec;
@@ -147,13 +109,18 @@
             border-color: #94a3b8;
             background: #f8fafc;
         }
-
+        .btn-danger {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        .btn-danger:hover {
+            background: #fecaca;
+        }
         .btn-sm {
-            padding: 6px 12px;
-            font-size: 13px;
+            padding: 4px 12px;
+            font-size: 12px;
             border-radius: 8px;
         }
-
         .btn-success {
             background: #22c55e;
             color: #fff;
@@ -162,24 +129,15 @@
             background: #16a34a;
         }
 
-        .btn-warning {
-            background: #f59e0b;
-            color: #fff;
-        }
-        .btn-warning:hover {
-            background: #d97706;
-        }
-
-        /* ===== 模式切换 ===== */
+        /* mode tabs */
         .mode-tabs {
             display: flex;
             gap: 6px;
             background: #f1f5f9;
             padding: 4px;
-            border-radius: 14px;
-            margin-bottom: 20px;
+            border-radius: 16px;
+            margin-bottom: 24px;
         }
-
         .mode-tab {
             padding: 10px 28px;
             border: none;
@@ -188,55 +146,52 @@
             font-size: 16px;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.25s;
+            transition: 0.25s;
             color: #64748b;
         }
-
         .mode-tab.active {
-            background: #ffffff;
+            background: #fff;
             color: #1a2634;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
-
         .mode-tab:hover {
             color: #1e293b;
         }
 
-        /* ===== 面板容器 ===== */
         .panel {
             display: none;
-            animation: fadeIn 0.25s ease;
+            animation: fade 0.2s ease;
         }
         .panel.active {
             display: block;
         }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(6px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes fade {
+            0% {
+                opacity: 0.4;
+                transform: translateY(6px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* ===== 赛程表样式（与之前相同） ===== */
+        /* ---------- 赛程表 ---------- */
         .matches-container {
             display: flex;
             flex-direction: column;
             gap: 0;
-            margin-top: 6px;
         }
-
         .match-item {
             display: flex;
             flex-direction: column;
-            position: relative;
         }
-
         .divider {
             width: 100%;
             height: 2px;
             background: linear-gradient(to right, #e2e8f0, #cbd5e1, #e2e8f0);
             border: none;
             margin: 0;
-            flex-shrink: 0;
             opacity: 0.6;
         }
         .divider-thick {
@@ -244,28 +199,25 @@
             background: linear-gradient(to right, #dce4ec, #b9c7da, #dce4ec);
             opacity: 0.8;
         }
-
         .match-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 18px 12px;
-            background: #ffffff;
+            padding: 14px 12px;
             gap: 12px;
-            transition: background 0.15s;
-            border-radius: 4px;
             flex-wrap: wrap;
+            background: #fff;
+            border-radius: 4px;
         }
         .match-content:hover {
             background: #fafcff;
         }
-
         .team-block {
             display: flex;
             align-items: center;
-            gap: 14px;
-            flex: 1 1 200px;
-            min-width: 140px;
+            gap: 12px;
+            flex: 1 1 180px;
+            min-width: 120px;
         }
         .team-block.left {
             justify-content: flex-end;
@@ -275,10 +227,9 @@
             justify-content: flex-start;
             flex-direction: row-reverse;
         }
-
         .logo-wrapper {
-            width: 66px;
-            aspect-ratio: 3 / 2;
+            width: 56px;
+            aspect-ratio: 3/2;
             flex-shrink: 0;
             border: 2px solid #b8c9dd;
             border-left: 6px solid #9aa6b5;
@@ -286,19 +237,17 @@
             background: #f8fafc;
             overflow: hidden;
             cursor: pointer;
-            position: relative;
-            transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-            transform: perspective(400px) rotateY(-1deg) rotateX(1deg);
+            box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.06);
+            transition: 0.2s;
+            position: relative;
         }
         .logo-wrapper:hover {
             border-color: #2563eb;
             border-left-color: #1d4ed8;
-            box-shadow: 2px 6px 12px rgba(37, 99, 235, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-            transform: perspective(400px) rotateY(-2deg) rotateX(2deg) scale(1.02);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
         }
         .logo-wrapper img {
             width: 100%;
@@ -306,585 +255,530 @@
             object-fit: cover;
             display: block;
         }
-        .logo-wrapper .logo-placeholder {
-            font-size: 28px;
-            line-height: 1;
-            opacity: 0.6;
-            user-select: none;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            background: #f1f5f9;
-        }
         .logo-wrapper .logo-emoji {
-            font-size: 38px;
+            font-size: 32px;
             line-height: 1;
-            user-select: none;
-            pointer-events: none;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+        .logo-wrapper .logo-placeholder {
+            font-size: 24px;
+            opacity: 0.4;
         }
         .logo-wrapper .upload-hint {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(0, 0, 0, 0.6);
             color: #fff;
-            font-size: 9px;
+            font-size: 8px;
             text-align: center;
-            padding: 3px 0;
+            padding: 2px 0;
             opacity: 0;
-            transition: opacity 0.25s;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(2px);
+            transition: 0.2s;
             pointer-events: none;
-            border-radius: 0 0 2px 0;
-            font-weight: 500;
         }
         .logo-wrapper:hover .upload-hint {
             opacity: 1;
         }
-
         .team-name-input {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             border: none;
             background: transparent;
-            color: #1a2634;
-            padding: 4px 8px;
+            padding: 4px 6px;
             border-radius: 6px;
-            min-width: 60px;
-            width: 100%;
-            max-width: 140px;
-            transition: background 0.2s, box-shadow 0.2s;
-            text-align: inherit;
-        }
-        .team-block.left .team-name-input {
-            text-align: right;
-        }
-        .team-block.right .team-name-input {
-            text-align: left;
+            min-width: 50px;
+            max-width: 120px;
+            transition: 0.2s;
         }
         .team-name-input:focus {
             outline: none;
             background: #f5f9ff;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.10);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.08);
         }
-        .team-name-input::placeholder {
-            color: #b8c9dd;
-            font-weight: 400;
-            font-size: 15px;
-        }
-
         .score-block {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
+            gap: 4px;
             flex-shrink: 0;
-            padding: 0 8px;
-            min-width: 80px;
+            padding: 0 6px;
         }
         .score-input {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             text-align: center;
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 700;
             border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            border-radius: 8px;
             background: #fafcff;
-            color: #0f172a;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            padding: 0 2px;
-            font-variant-numeric: tabular-nums;
+            transition: 0.2s;
         }
         .score-input:focus {
-            outline: none;
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-            background: #ffffff;
-        }
-        .score-input::placeholder {
-            color: #cbd5e1;
-            font-weight: 400;
-            font-size: 18px;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            outline: none;
         }
         .score-dash {
-            font-size: 28px;
-            font-weight: 300;
+            font-size: 24px;
             color: #94a3b8;
-            user-select: none;
-            padding: 0 2px;
         }
-
         .match-delete-btn {
-            flex-shrink: 0;
-            margin-left: 4px;
-            opacity: 0.3;
-            transition: opacity 0.2s, transform 0.15s;
             background: transparent;
             border: none;
-            font-size: 20px;
-            cursor: pointer;
+            font-size: 18px;
             color: #94a3b8;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: 0.2s;
             padding: 4px 8px;
-            border-radius: 8px;
-            line-height: 1;
         }
         .match-delete-btn:hover {
             opacity: 1;
             color: #b91c1c;
             background: #fee2e2;
-            transform: scale(1.05);
-        }
-        .match-item:hover .match-delete-btn {
-            opacity: 0.6;
+            border-radius: 8px;
         }
 
-        /* ===== 积分榜多小组样式 ===== */
+        /* ---------- 积分榜 ---------- */
         .standings-controls {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 16px 24px;
-            margin-bottom: 22px;
-            padding: 12px 16px;
+            gap: 16px;
+            margin-bottom: 18px;
+            padding: 10px 16px;
             background: #f8fafc;
             border-radius: 16px;
         }
-
-        .standings-controls .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
         .group-block {
             background: #fafcff;
             border-radius: 16px;
-            padding: 16px 12px 12px;
+            padding: 14px 12px;
             margin-bottom: 24px;
             border: 1px solid #e9edf2;
-            transition: border-color 0.2s;
         }
-        .group-block:hover {
-            border-color: #cbd5e1;
-        }
-
         .group-header {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px dashed #dce4ec;
+            gap: 12px;
             flex-wrap: wrap;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px dashed #dce4ec;
         }
-
         .group-name-input {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             border: none;
             background: transparent;
-            color: #1a2634;
-            padding: 4px 10px;
-            border-radius: 8px;
-            flex: 1 1 200px;
-            min-width: 120px;
-            transition: background 0.2s;
+            padding: 2px 8px;
+            border-radius: 6px;
+            flex: 1 1 160px;
         }
         .group-name-input:focus {
             outline: none;
             background: #f1f5f9;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.10);
         }
-        .group-name-input::placeholder {
-            color: #b0c4db;
-            font-weight: 500;
-            font-size: 18px;
-        }
-
         .group-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             margin-left: auto;
         }
-
-        .group-teams {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
         .standings-row {
             display: flex;
             align-items: center;
-            padding: 8px 8px 8px 12px;
-            background: #ffffff;
+            padding: 6px 8px 6px 12px;
             gap: 8px 12px;
             flex-wrap: wrap;
-            transition: background 0.15s;
+            background: #fff;
             border-radius: 4px;
         }
         .standings-row:hover {
             background: #f5f9ff;
         }
-
         .standings-divider {
             width: 100%;
             height: 2px;
             background: linear-gradient(to right, #e2e8f0, #cbd5e1, #e2e8f0);
+            opacity: 0.3;
             border: none;
-            margin: 0;
-            flex-shrink: 0;
-            opacity: 0.4;
         }
         .standings-divider-top {
-            height: 2px;
-            background: linear-gradient(to right, #dce4ec, #b9c7da, #dce4ec);
             opacity: 0.7;
         }
-
         .standings-rank {
             font-weight: 700;
-            font-size: 17px;
+            font-size: 16px;
             color: #475569;
-            min-width: 32px;
+            min-width: 28px;
             text-align: center;
-            flex-shrink: 0;
         }
-
         .standings-team {
             display: flex;
             align-items: center;
-            gap: 12px;
-            flex: 2 1 160px;
-            min-width: 140px;
+            gap: 10px;
+            flex: 2 1 140px;
+            min-width: 120px;
         }
-
         .standings-team .logo-wrapper {
-            width: 50px; /* 稍微小一点 */
+            width: 44px;
         }
         .standings-team .logo-wrapper .logo-emoji {
-            font-size: 28px;
+            font-size: 24px;
         }
-
-        .standings-team .team-name-input {
-            font-size: 15px;
-            max-width: 110px;
-            text-align: left;
-        }
-
         .standings-stats {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
             gap: 4px 8px;
-            flex: 3 1 360px;
-            justify-content: flex-start;
+            flex: 3 1 300px;
         }
-
         .stat-item {
             display: flex;
             align-items: center;
-            gap: 3px;
-            font-size: 13px;
+            gap: 2px;
+            font-size: 12px;
             font-weight: 500;
             color: #334155;
         }
         .stat-item input {
-            width: 34px;
-            padding: 3px 2px;
+            width: 30px;
+            padding: 2px 0;
             text-align: center;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             border: 2px solid #e2e8f0;
             border-radius: 6px;
             background: #fafcff;
-            transition: border-color 0.2s;
         }
         .stat-item input:focus {
-            outline: none;
             border-color: #2563eb;
-            background: #ffffff;
-        }
-        .stat-item input[type="number"] {
-            -moz-appearance: textfield;
-        }
-        .stat-item input::-webkit-inner-spin-button,
-        .stat-item input::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+            outline: none;
         }
         .stat-label {
             color: #64748b;
             font-weight: 400;
-            font-size: 12px;
+            font-size: 11px;
         }
-
         .standings-delete-btn {
-            flex-shrink: 0;
-            opacity: 0.3;
-            transition: opacity 0.2s;
             background: transparent;
             border: none;
-            font-size: 18px;
-            cursor: pointer;
+            font-size: 16px;
             color: #94a3b8;
-            padding: 4px 8px;
-            border-radius: 8px;
-            line-height: 1;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: 0.2s;
+            padding: 0 6px;
         }
         .standings-delete-btn:hover {
             opacity: 1;
             color: #b91c1c;
-            background: #fee2e2;
-        }
-        .standings-row:hover .standings-delete-btn {
-            opacity: 0.6;
         }
 
-        .group-empty {
-            text-align: center;
-            padding: 20px;
-            color: #94a3b8;
+        /* ---------- 淘汰赛赛程 (bracket) ---------- */
+        .bracket-container {
+            overflow-x: auto;
+            padding: 16px 0 8px;
+        }
+        .bracket {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            min-width: 800px;
             font-size: 14px;
         }
+        .bracket-round {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .round-label {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1e293b;
+            padding: 6px 0 4px 8px;
+            border-bottom: 2px solid #dce4ec;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .bracket-match {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 8px;
+            background: #fafcff;
+            border-radius: 6px;
+            transition: 0.1s;
+            flex-wrap: nowrap;
+        }
+        .bracket-match:hover {
+            background: #f1f5f9;
+        }
+        .bracket-team {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 100px;
+            flex: 0 1 auto;
+        }
+        .bracket-team.left {
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+        .bracket-team.right {
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+        }
+        .bracket-team .logo-wrapper {
+            width: 38px;
+            aspect-ratio: 3/2;
+            border-left-width: 4px;
+            border-radius: 2px 3px 3px 2px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .bracket-team .logo-wrapper .logo-emoji {
+            font-size: 20px;
+        }
+        .bracket-team .logo-wrapper .logo-placeholder {
+            font-size: 16px;
+        }
+        .bracket-team .team-name-input {
+            font-size: 13px;
+            font-weight: 600;
+            max-width: 90px;
+            min-width: 40px;
+            padding: 2px 4px;
+        }
+        .bracket-score {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+        .bracket-score .score-input {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            padding: 0;
+        }
+        .bracket-score .score-dash {
+            font-size: 16px;
+            padding: 0 2px;
+        }
+        .bracket-connector {
+            display: none;
+        }
 
-        /* ===== 底部 ===== */
-        .footer-actions {
+        /* 响应式 */
+        @media (max-width: 700px) {
+            .app {
+                padding: 16px;
+            }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .toolbar {
+                margin-left: 0;
+            }
+            .mode-tab {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .bracket-team .team-name-input {
+                max-width: 60px;
+                font-size: 11px;
+            }
+            .bracket-team .logo-wrapper {
+                width: 30px;
+            }
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #94a3b8;
+        }
+        .empty-state .empty-icon {
+            font-size: 44px;
+            opacity: 0.5;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .footer-bar {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
             margin-top: 24px;
-            padding-top: 20px;
+            padding-top: 16px;
             border-top: 2px solid #eef3f8;
             gap: 12px;
         }
-
-        .footer-actions .match-count,
-        .footer-actions .team-count {
+        .footer-bar .info {
             font-size: 14px;
             color: #64748b;
-            font-weight: 500;
         }
-        .footer-actions .match-count span,
-        .footer-actions .team-count span {
-            color: #1a2634;
+        .footer-bar .info span {
             font-weight: 700;
+            color: #1a2634;
         }
-
         .btn-group {
             display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
-        /* ===== 响应式 ===== */
-        @media (max-width: 820px) {
-            .app-container { padding: 20px 16px 32px; }
-            .header { flex-direction: column; align-items: stretch; gap: 12px; }
-            .tournament-title-area { flex: 1 1 auto; }
-            .tournament-input { font-size: 20px; }
-            .toolbar { margin-left: 0; justify-content: flex-start; }
-            .match-content { padding: 14px 6px; gap: 8px; }
-            .team-block { flex: 1 1 120px; min-width: 100px; gap: 10px; }
-            .logo-wrapper { width: 54px; border-left-width: 4px; }
-            .logo-wrapper .logo-emoji { font-size: 30px; }
-            .team-name-input { font-size: 15px; max-width: 100px; }
-            .score-input { width: 40px; height: 40px; font-size: 20px; }
-            .score-dash { font-size: 22px; }
-            .score-block { min-width: 60px; gap: 4px; }
-            .standings-team .logo-wrapper { width: 44px; }
-            .standings-stats { gap: 4px 6px; }
-            .stat-item input { width: 30px; font-size: 12px; }
-            .stat-label { font-size: 11px; }
-            .group-header { flex-direction: column; align-items: stretch; }
-            .group-actions { margin-left: 0; justify-content: flex-start; }
+        /* 保存提示 */
+        .save-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.3s ease;
+            pointer-events: none;
+            z-index: 999;
         }
-
-        @media (max-width: 540px) {
-            .match-content { flex-wrap: wrap; justify-content: center; padding: 12px 4px; gap: 6px; }
-            .team-block { flex: 0 1 auto; min-width: 80px; gap: 8px; }
-            .team-block.left { justify-content: flex-start; flex: 1 1 100%; order: 1; }
-            .team-block.right { justify-content: flex-start; flex: 1 1 100%; order: 3; }
-            .score-block { order: 2; flex: 0 1 auto; min-width: 60px; padding: 4px 0; }
-            .match-delete-btn { order: 4; margin-left: 0; opacity: 0.6; }
-            .logo-wrapper { width: 46px; border-left-width: 4px; }
-            .team-name-input { font-size: 14px; max-width: 90px; }
-            .score-input { width: 36px; height: 36px; font-size: 18px; }
-            .standings-row { flex-direction: column; align-items: stretch; gap: 6px; }
-            .standings-rank { text-align: left; min-width: auto; }
-            .standings-team { flex: 1 1 auto; }
-            .standings-stats { flex: 1 1 auto; justify-content: space-between; }
-            .stat-item input { width: 32px; }
-            .footer-actions { flex-direction: column; align-items: stretch; gap: 10px; }
-            .btn-group { justify-content: center; }
-            .standings-controls { flex-direction: column; align-items: stretch; gap: 10px; }
-            .group-block { padding: 12px 8px; }
+        .save-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
-
-        @media (max-width: 400px) {
-            .app-container { padding: 12px 8px 20px; }
-            .logo-wrapper { width: 38px; border-left-width: 3px; }
-            .logo-wrapper .logo-emoji { font-size: 22px; }
-            .team-name-input { font-size: 12px; max-width: 70px; padding: 2px 4px; }
-            .score-input { width: 30px; height: 30px; font-size: 15px; }
-            .score-dash { font-size: 18px; }
-            .tournament-input { font-size: 17px; }
-            .standings-team .logo-wrapper { width: 36px; }
-            .standings-team .logo-wrapper .logo-emoji { font-size: 20px; }
-            .stat-item input { width: 26px; font-size: 11px; }
-            .stat-label { font-size: 10px; }
-        }
-
-        /* ===== 打印 ===== */
-        @media print {
-            body { background: #fff; padding: 10px; }
-            .app-container { box-shadow: none; padding: 16px; }
-            .btn, .match-delete-btn, .footer-actions .btn-group, .toolbar .btn,
-            .standings-delete-btn, .group-actions .btn { display: none !important; }
-            .match-content { background: #fff !important; padding: 12px 4px; border-bottom: 1px solid #ddd; }
-            .divider, .standings-divider { background: #ccc !important; height: 1px !important; }
-            .logo-wrapper { 
-                border: 2px solid #999 !important; 
-                border-left: 6px solid #777 !important;
-                box-shadow: none !important;
-                transform: none !important;
-            }
-            .team-name-input, .stat-item input, .group-name-input { border: 1px solid #ccc; background: #fff !important; box-shadow: none !important; }
-            .match-item, .standings-row { break-inside: avoid; }
-            .footer-actions .match-count, .footer-actions .team-count { font-size: 12px; }
-            .mode-tabs { display: none; }
-            .panel { display: block !important; }
-            .panel:not(.active) { display: none !important; }
-            .group-block { border: 1px solid #ccc !important; }
-        }
-
-        .hidden { display: none !important; }
-        .empty-state { text-align: center; padding: 40px 20px; color: #94a3b8; }
-        .empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
-        .empty-state h3 { font-size: 20px; font-weight: 600; color: #475569; margin-bottom: 8px; }
-        .empty-state p { font-size: 15px; color: #94a3b8; max-width: 360px; margin: 0 auto; }
     </style>
 </head>
 <body>
-
-    <div class="app-container" id="app">
-        <!-- ===== 头部 ===== -->
+    <div class="app" id="app">
+        <!-- header -->
         <header class="header">
-            <div class="tournament-title-area">
-                <span class="tournament-icon">🏆</span>
-                <input
-                class="tournament-input"
-                id="tournamentName"
-                type="text"
-                placeholder="输入赛事名称..."
-                value="2026 世界杯"
-                autofocus
-                />
+            <div class="title-area">
+                <span class="icon">⚽</span>
+                <input class="tournament-input" id="tournamentName" type="text" placeholder="赛事名称" value="2026 世界杯" />
             </div>
             <div class="toolbar">
-                <button class="btn btn-outline btn-sm" id="addMatchBtn">
-                    <span>＋</span> 添加比赛
-                </button>
-                <button class="btn btn-outline btn-sm" id="addExampleBtn">
-                    📋 示例
-                </button>
-                <button class="btn btn-outline btn-sm" id="clearAllBtn">
-                    🗑 清空
-                </button>
+                <button class="btn btn-outline btn-sm" id="addMatchBtn">＋ 添加比赛</button>
+                <button class="btn btn-outline btn-sm" id="resetExampleBtn">📋 示例</button>
+                <button class="btn btn-outline btn-sm" id="clearMatchesBtn">🗑 清空</button>
             </div>
         </header>
 
-        <!-- ===== 模式切换 ===== -->
+        <!-- mode tabs -->
         <div class="mode-tabs">
             <button class="mode-tab active" data-mode="schedule">📋 赛程表</button>
             <button class="mode-tab" data-mode="standings">📊 积分榜</button>
+            <button class="mode-tab" data-mode="bracket">🏆 淘汰赛赛程</button>
         </div>
 
-        <!-- ===== 赛程表面板 ===== -->
+        <!-- 赛程表 -->
         <div class="panel active" id="schedulePanel">
-            <div class="matches-container" id="matchesContainer">
-                <!-- 由 JS 渲染 -->
-            </div>
+            <div class="matches-container" id="matchesContainer"></div>
         </div>
 
-        <!-- ===== 积分表面板 ===== -->
+        <!-- 积分榜 -->
         <div class="panel" id="standingsPanel">
-            <!-- 控制栏 -->
             <div class="standings-controls">
                 <div class="btn-group">
                     <button class="btn btn-primary btn-sm" id="addGroupBtn">➕ 添加小组</button>
                     <button class="btn btn-danger btn-sm" id="clearStandingsBtn">🗑 清空积分榜</button>
                 </div>
-                <span style="font-size:14px; color:#64748b; margin-left:auto;" id="standingsTotalInfo">共 0 个小组，0 支球队</span>
+                <span style="font-size:14px;color:#64748b;margin-left:auto;" id="standingsTotalInfo">共 0 个小组，0 支球队</span>
             </div>
+            <div id="standingsContainer"></div>
+        </div>
 
-            <div id="standingsContainer">
+        <!-- 淘汰赛赛程 -->
+        <div class="panel" id="bracketPanel">
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;align-items:center;">
+                <button class="btn btn-primary btn-sm" id="resetBracketBtn">🔄 重置默认淘汰赛</button>
+                <span style="font-size:14px;color:#64748b;">点击队标上传图片，点击比分/队名直接编辑</span>
+            </div>
+            <div class="bracket-container" id="bracketContainer">
                 <!-- 由 JS 渲染 -->
             </div>
         </div>
 
-        <!-- ===== 底部 ===== -->
-        <footer class="footer-actions">
-            <div class="match-count" id="footerCount">
-                共 <span id="matchCount">0</span> 场比赛
-            </div>
+        <!-- footer -->
+        <footer class="footer-bar">
+            <div class="info" id="footerInfo">共 <span id="matchCount">0</span> 场比赛</div>
             <div class="btn-group">
-                <button class="btn btn-outline btn-sm" id="exportJsonBtn">
-                    📥 导出 JSON
-                </button>
-                <button class="btn btn-outline btn-sm" id="importJsonBtn">
-                    📤 导入 JSON
-                </button>
-                <button class="btn btn-outline btn-sm" id="printBtn">
-                    🖨 打印
-                </button>
+                <button class="btn btn-outline btn-sm" id="exportJsonBtn">📥 导出 JSON</button>
+                <button class="btn btn-outline btn-sm" id="importJsonBtn">📤 导入 JSON</button>
+                <button class="btn btn-outline btn-sm" id="printBtn">🖨 打印</button>
             </div>
             <input type="file" id="importFileInput" accept=".json" style="display:none" />
         </footer>
     </div>
 
+    <!-- 保存提示 -->
+    <div class="save-toast" id="saveToast">✅ 数据已自动保存</div>
+
     <script>
         (function() {
             'use strict';
 
-            // =====================================================
-            //  数据状态
-            // =====================================================
-            // 赛程
+            // ============ 存储键名 ============
+            const STORAGE_KEY = 'tournament_data_v2';
+
+            // ============ 数据 ============
             let matches = [];
             let nextMatchId = 1;
 
-            // 积分榜：多个小组，每个小组有 groupName 和 teams 数组
             let groups = [];
             let nextGroupId = 1;
-            let nextTeamId = 1; // 用于小组内球队ID（全局唯一）
+            let nextTeamId = 1;
 
-            // 当前模式
+            let bracketData = [];
+
+            function getDefaultBracket() {
+                const rounds = [
+                    { label: '32强', count: 16 },
+                    { label: '16强', count: 8 },
+                    { label: '8强', count: 4 },
+                    { label: '半决赛', count: 2 },
+                    { label: '三四名', count: 1 },
+                    { label: '决赛', count: 1 }
+                ];
+                let bracket = [];
+                rounds.forEach(r => {
+                    let matches = [];
+                    for (let i = 0; i < r.count; i++) {
+                        matches.push({
+                            left: { name: '', logo: '', logoType: 'emoji' },
+                            right: { name: '', logo: '', logoType: 'emoji' },
+                            score: { left: '', right: '' }
+                        });
+                    }
+                    bracket.push({ label: r.label, matches: matches });
+                });
+                return bracket;
+            }
+
             let currentMode = 'schedule';
 
-            // DOM 引用
+            // DOM
             const containerMatches = document.getElementById('matchesContainer');
             const containerStandings = document.getElementById('standingsContainer');
+            const containerBracket = document.getElementById('bracketContainer');
             const tournamentInput = document.getElementById('tournamentName');
             const matchCountSpan = document.getElementById('matchCount');
-            const footerCount = document.getElementById('footerCount');
+            const footerInfo = document.getElementById('footerInfo');
             const standingsTotalInfo = document.getElementById('standingsTotalInfo');
+            const saveToast = document.getElementById('saveToast');
 
             const addMatchBtn = document.getElementById('addMatchBtn');
-            const exampleBtn = document.getElementById('addExampleBtn');
-            const clearAllBtn = document.getElementById('clearAllBtn');
-
+            const resetExampleBtn = document.getElementById('resetExampleBtn');
+            const clearMatchesBtn = document.getElementById('clearMatchesBtn');
             const addGroupBtn = document.getElementById('addGroupBtn');
             const clearStandingsBtn = document.getElementById('clearStandingsBtn');
-
+            const resetBracketBtn = document.getElementById('resetBracketBtn');
             const exportBtn = document.getElementById('exportJsonBtn');
             const importBtn = document.getElementById('importJsonBtn');
             const importFileInput = document.getElementById('importFileInput');
@@ -893,67 +787,23 @@
             const modeTabs = document.querySelectorAll('.mode-tab');
             const panelSchedule = document.getElementById('schedulePanel');
             const panelStandings = document.getElementById('standingsPanel');
+            const panelBracket = document.getElementById('bracketPanel');
 
-            // =====================================================
-            //  工具函数
-            // =====================================================
-            function generateMatchId() { return nextMatchId++; }
-            function generateGroupId() { return nextGroupId++; }
-            function generateTeamId() { return nextTeamId++; }
+            // ============ 工具 ============
+            function genMatchId() { return nextMatchId++; }
 
-            function escapeHtml(str) {
-                if (!str) return '';
-                return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            }
+            function genGroupId() { return nextGroupId++; }
 
-            // 默认示例数据（赛程）
-            function getExampleMatches() {
-                return [{
-                    id: generateMatchId(),
-                    leftTeam: { name: '巴西', logo: '🇧🇷', logoType: 'emoji' },
-                    rightTeam: { name: '阿根廷', logo: '🇦🇷', logoType: 'emoji' },
-                    score: { left: '2', right: '1' }
-                }, {
-                    id: generateMatchId(),
-                    leftTeam: { name: '法国', logo: '🇫🇷', logoType: 'emoji' },
-                    rightTeam: { name: '德国', logo: '🇩🇪', logoType: 'emoji' },
-                    score: { left: '0', right: '0' }
-                }, {
-                    id: generateMatchId(),
-                    leftTeam: { name: '英格兰', logo: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', logoType: 'emoji' },
-                    rightTeam: { name: '意大利', logo: '🇮🇹', logoType: 'emoji' },
-                    score: { left: '1', right: '1' }
-                }];
-            }
+            function genTeamId() { return nextTeamId++; }
 
-            // 默认积分榜示例（两个小组）
-            function getExampleGroups() {
-                const g1 = {
-                    id: generateGroupId(),
-                    groupName: 'A组',
-                    teams: [
-                        createTeamObj('巴西', '🇧🇷', { played: '3', win: '2', draw: '1', lose: '0', goalsFor: '5',
-                            goalsAgainst: '2', goalDiff: '3', points: '7' }),
-                        createTeamObj('阿根廷', '🇦🇷', { played: '3', win: '2', draw: '0', lose: '1', goalsFor: '4',
-                            goalsAgainst: '3', goalDiff: '1', points: '6' }),
-                    ]
-                };
-                const g2 = {
-                    id: generateGroupId(),
-                    groupName: 'B组',
-                    teams: [
-                        createTeamObj('法国', '🇫🇷', { played: '3', win: '1', draw: '1', lose: '1', goalsFor: '3',
-                            goalsAgainst: '3', goalDiff: '0', points: '4' }),
-                        createTeamObj('德国', '🇩🇪', { played: '3', win: '0', draw: '0', lose: '3', goalsFor: '1',
-                            goalsAgainst: '5', goalDiff: '-4', points: '0' }),
-                    ]
-                };
-                return [g1, g2];
+            function escapeHtml(s) {
+                if (!s) return '';
+                return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             }
 
             function createTeamObj(name, logo, stats) {
                 return {
-                    id: generateTeamId(),
+                    id: genTeamId(),
                     team: {
                         name: name || '',
                         logo: logo || '',
@@ -973,617 +823,120 @@
                 };
             }
 
-            // =====================================================
-            //  渲染：赛程表（与之前相同，略作精简）
-            // =====================================================
-            function renderMatches() {
-                if (matches.length === 0) {
-                    containerMatches.innerHTML = `
-                            <div class="empty-state">
-                                <div class="empty-icon">📋</div>
-                                <h3>还没有比赛</h3>
-                                <p>点击「添加比赛」创建新的赛程，或点击「示例」快速体验</p>
-                            </div>
-                        `;
-                    matchCountSpan.textContent = '0';
-                    updateFooterCount();
-                    return;
-                }
-
-                let html = '';
-                matches.forEach((match, index) => {
-                    const isFirst = index === 0;
-                    const leftLogo = match.leftTeam.logo || '';
-                    const rightLogo = match.rightTeam.logo || '';
-                    const leftLogoType = match.leftTeam.logoType || 'emoji';
-                    const rightLogoType = match.rightTeam.logoType || 'emoji';
-
-                    let leftLogoHtml = '';
-                    if (leftLogoType === 'emoji' && leftLogo) {
-                        leftLogoHtml = `<span class="logo-emoji">${leftLogo}</span>`;
-                    } else if (leftLogo) {
-                        leftLogoHtml = `<img src="${leftLogo}" alt="队标" />`;
-                    } else {
-                        leftLogoHtml = `<span class="logo-placeholder">⬜</span>`;
-                    }
-
-                    let rightLogoHtml = '';
-                    if (rightLogoType === 'emoji' && rightLogo) {
-                        rightLogoHtml = `<span class="logo-emoji">${rightLogo}</span>`;
-                    } else if (rightLogo) {
-                        rightLogoHtml = `<img src="${rightLogo}" alt="队标" />`;
-                    } else {
-                        rightLogoHtml = `<span class="logo-placeholder">⬜</span>`;
-                    }
-
-                    html += `
-                            <div class="match-item" data-match-id="${match.id}">
-                                <div class="divider ${isFirst ? 'divider-thick' : ''}"></div>
-                                <div class="match-content">
-                                    <div class="team-block left">
-                                        <div class="logo-wrapper" data-team="left" data-match-id="${match.id}">
-                                            ${leftLogoHtml}
-                                            <span class="upload-hint">点击上传</span>
-                                        </div>
-                                        <input class="team-name-input" type="text" 
-                                               data-team="left" data-match-id="${match.id}"
-                                               value="${escapeHtml(match.leftTeam.name)}" 
-                                               placeholder="队伍名" />
-                                    </div>
-                                    <div class="score-block">
-                                        <input class="score-input" type="text" inputmode="numeric" 
-                                               data-side="left" data-match-id="${match.id}"
-                                               value="${escapeHtml(match.score.left)}" 
-                                               placeholder="0" maxlength="3" />
-                                        <span class="score-dash">—</span>
-                                        <input class="score-input" type="text" inputmode="numeric" 
-                                               data-side="right" data-match-id="${match.id}"
-                                               value="${escapeHtml(match.score.right)}" 
-                                               placeholder="0" maxlength="3" />
-                                    </div>
-                                    <div class="team-block right">
-                                        <div class="logo-wrapper" data-team="right" data-match-id="${match.id}">
-                                            ${rightLogoHtml}
-                                            <span class="upload-hint">点击上传</span>
-                                        </div>
-                                        <input class="team-name-input" type="text" 
-                                               data-team="right" data-match-id="${match.id}"
-                                               value="${escapeHtml(match.rightTeam.name)}" 
-                                               placeholder="队伍名" />
-                                    </div>
-                                    <button class="match-delete-btn" data-match-id="${match.id}" title="删除这场比赛">✕</button>
-                                </div>
-                            </div>
-                        `;
-                });
-                html += `<div class="divider divider-thick"></div>`;
-                containerMatches.innerHTML = html;
-                matchCountSpan.textContent = matches.length;
-                updateFooterCount();
-
-                // 事件绑定
-                containerMatches.querySelectorAll('.logo-wrapper').forEach(el => {
-                    el.addEventListener('click', function(e) {
-                        const matchId = parseInt(this.dataset.matchId);
-                        const team = this.dataset.team;
-                        triggerMatchLogoUpload(matchId, team);
-                    });
-                });
-
-                containerMatches.querySelectorAll('.team-name-input').forEach(el => {
-                    el.addEventListener('input', function() {
-                        const matchId = parseInt(this.dataset.matchId);
-                        const team = this.dataset.team;
-                        const match = matches.find(m => m.id === matchId);
-                        if (!match) return;
-                        if (team === 'left') match.leftTeam.name = this.value;
-                        else match.rightTeam.name = this.value;
-                    });
-                });
-
-                containerMatches.querySelectorAll('.score-input').forEach(el => {
-                    el.addEventListener('input', function() {
-                        const matchId = parseInt(this.dataset.matchId);
-                        const side = this.dataset.side;
-                        const match = matches.find(m => m.id === matchId);
-                        if (!match) return;
-                        let val = this.value.replace(/[^0-9]/g, '');
-                        if (val.length > 3) val = val.slice(0, 3);
-                        this.value = val;
-                        if (side === 'left') match.score.left = val;
-                        else match.score.right = val;
-                    });
-                    el.addEventListener('keydown', function(e) {
-                        if (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'Tab' ||
-                            e.key === 'ArrowLeft' || e.key === 'ArrowRight' ||
-                            e.key === 'Home' || e.key === 'End') return;
-                        if (!/^[0-9]$/.test(e.key) && e.key !== 'Enter') e.preventDefault();
-                    });
-                });
-
-                containerMatches.querySelectorAll('.match-delete-btn').forEach(el => {
-                    el.addEventListener('click', function() {
-                        const matchId = parseInt(this.dataset.matchId);
-                        deleteMatch(matchId);
-                    });
-                });
+            function getExampleMatches() {
+                return [{
+                    id: genMatchId(),
+                    leftTeam: { name: '巴西', logo: '🇧🇷', logoType: 'emoji' },
+                    rightTeam: { name: '阿根廷', logo: '🇦🇷', logoType: 'emoji' },
+                    score: { left: '2', right: '1' }
+                }, {
+                    id: genMatchId(),
+                    leftTeam: { name: '法国', logo: '🇫🇷', logoType: 'emoji' },
+                    rightTeam: { name: '德国', logo: '🇩🇪', logoType: 'emoji' },
+                    score: { left: '0', right: '0' }
+                }, {
+                    id: genMatchId(),
+                    leftTeam: { name: '英格兰', logo: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', logoType: 'emoji' },
+                    rightTeam: { name: '意大利', logo: '🇮🇹', logoType: 'emoji' },
+                    score: { left: '1', right: '1' }
+                }];
             }
 
-            // =====================================================
-            //  赛程操作
-            // =====================================================
-            function addMatch(leftName, rightName, leftLogo, rightLogo, leftScore, rightScore) {
-                const match = {
-                    id: generateMatchId(),
-                    leftTeam: {
-                        name: leftName || '',
-                        logo: leftLogo || '',
-                        logoType: leftLogo ? (leftLogo.startsWith('data:') || leftLogo.startsWith('http') ? 'image' :
-                            'emoji') : 'emoji'
-                    },
-                    rightTeam: {
-                        name: rightName || '',
-                        logo: rightLogo || '',
-                        logoType: rightLogo ? (rightLogo.startsWith('data:') || rightLogo.startsWith('http') ? 'image' :
-                            'emoji') : 'emoji'
-                    },
-                    score: { left: leftScore || '', right: rightScore || '' }
+            function getExampleGroups() {
+                const g1 = {
+                    id: genGroupId(),
+                    groupName: 'A组',
+                    teams: [
+                        createTeamObj('巴西', '🇧🇷', { played: '3', win: '2', draw: '1', lose: '0', goalsFor: '5',
+                            goalsAgainst: '2', goalDiff: '3', points: '7' }),
+                        createTeamObj('阿根廷', '🇦🇷', { played: '3', win: '2', draw: '0', lose: '1', goalsFor: '4',
+                            goalsAgainst: '3', goalDiff: '1', points: '6' }),
+                    ]
                 };
-                matches.push(match);
-                renderMatches();
-                return match;
-            }
-
-            function deleteMatch(id) {
-                if (matches.length === 0) return;
-                if (!confirm('确定要删除这场比赛吗？')) return;
-                matches = matches.filter(m => m.id !== id);
-                renderMatches();
-            }
-
-            function clearAllMatches() {
-                if (matches.length === 0) return;
-                if (!confirm('确定要清空所有比赛吗？')) return;
-                matches = [];
-                renderMatches();
-            }
-
-            function loadExampleMatches() {
-                matches = getExampleMatches();
-                renderMatches();
-            }
-
-            function triggerMatchLogoUpload(matchId, team) {
-                const match = matches.find(m => m.id === matchId);
-                if (!match) return;
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = 'image/*';
-                input.style.display = 'none';
-                document.body.appendChild(input);
-                input.addEventListener('change', function() {
-                    if (this.files && this.files[0]) {
-                        const file = this.files[0];
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const dataUrl = e.target.result;
-                            if (team === 'left') {
-                                match.leftTeam.logo = dataUrl;
-                                match.leftTeam.logoType = 'image';
-                            } else {
-                                match.rightTeam.logo = dataUrl;
-                                match.rightTeam.logoType = 'image';
-                            }
-                            renderMatches();
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                    document.body.removeChild(input);
-                });
-                input.addEventListener('cancel', function() { document.body.removeChild(input); });
-                input.click();
-            }
-
-            // =====================================================
-            //  渲染：积分榜（多小组）
-            // =====================================================
-            function renderStandings() {
-                if (groups.length === 0) {
-                    containerStandings.innerHTML = `
-                            <div class="empty-state">
-                                <div class="empty-icon">📊</div>
-                                <h3>积分榜为空</h3>
-                                <p>点击「添加小组」创建第一个小组</p>
-                            </div>
-                        `;
-                    updateStandingsInfo();
-                    return;
-                }
-
-                let html = '';
-                groups.forEach((group, groupIndex) => {
-                    const isFirstGroup = groupIndex === 0;
-                    html += `
-                            <div class="group-block" data-group-id="${group.id}">
-                                <div class="group-header">
-                                    <input class="group-name-input" type="text" 
-                                           data-group-id="${group.id}" 
-                                           value="${escapeHtml(group.groupName)}" 
-                                           placeholder="小组名称" />
-                                    <div class="group-actions">
-                                        <button class="btn btn-success btn-sm add-team-btn" data-group-id="${group.id}">➕ 添加球队</button>
-                                        <button class="btn btn-danger btn-sm delete-group-btn" data-group-id="${group.id}">🗑 删除小组</button>
-                                    </div>
-                                </div>
-                                <div class="group-teams">
-                        `;
-
-                    if (group.teams.length === 0) {
-                        html += `<div class="group-empty">该小组暂无球队，点击「添加球队」</div>`;
-                    } else {
-                        group.teams.forEach((team, teamIndex) => {
-                            const isFirst = teamIndex === 0;
-                            const logo = team.team.logo || '';
-                            const logoType = team.team.logoType || 'emoji';
-                            let logoHtml = '';
-                            if (logoType === 'emoji' && logo) {
-                                logoHtml = `<span class="logo-emoji">${logo}</span>`;
-                            } else if (logo) {
-                                logoHtml = `<img src="${logo}" alt="队标" />`;
-                            } else {
-                                logoHtml = `<span class="logo-placeholder">⬜</span>`;
-                            }
-
-                            html += `
-                                    <div class="standings-row" data-team-id="${team.id}">
-                                        <div class="standings-divider ${isFirst ? 'standings-divider-top' : ''}"></div>
-                                        <div class="standings-rank">${teamIndex + 1}</div>
-                                        <div class="standings-team">
-                                            <div class="logo-wrapper" data-team-id="${team.id}" data-group-id="${group.id}">
-                                                ${logoHtml}
-                                                <span class="upload-hint">点击上传</span>
-                                            </div>
-                                            <input class="team-name-input" type="text" 
-                                                   data-team-id="${team.id}" data-group-id="${group.id}"
-                                                   value="${escapeHtml(team.team.name)}" 
-                                                   placeholder="球队名" />
-                                        </div>
-                                        <div class="standings-stats">
-                                            <div class="stat-item">
-                                                <span class="stat-label">场</span>
-                                                <input type="number" class="stat-input" data-stat="played" data-team-id="${team.id}" data-group-id="${group.id}" value="${team.stats.played}" min="0" />
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-label">胜</span>
-                                                <input type="number" class="stat-input" data-stat="win" data-team-id="${team.id}" data-group-id="${group.id}" value="${team.stats.win}" min="0" />
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-label">平</span>
-                                                <input type="number" class="stat-input" data-stat="draw" data-team-id="${team.id}" data-group-id="${group.id}" value="${team.stats.draw}" min="0" />
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-label">负</span>
-                                                <input type="number" class="stat-input" data-stat="lose" data-team-id="${team.id}" data-group-id="${group.id}" value="${team.stats.lose}" min="0" />
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-label">进</span>
-                                                <input type="number" class="stat-input" data-stat="goalsFor" data-team-id="${team.id}" data-group-id="${group.id}" value="${team.stats.goalsFor}" min="0" />
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-label">失</span>
-                                                <input type="number" class="stat-input" data-stat="goalsAgainst" data-team-id="${team.id}" data-group-id="${group.id}" value="${team.stats.goalsAgainst}" min="0" />
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-label">净胜</span>
-                                                <input type="number" class="stat-input" data-stat="goalDiff" data-team-id="${team.id}" data-group-id="${group.id}" value="${team.stats.goalDiff}" />
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-label">积分</span>
-                                                <input type="number" class="stat-input" data-stat="points" data-team-id="${team.id}" data-group-id="${group.id}" value="${team.stats.points}" min="0" />
-                                            </div>
-                                        </div>
-                                        <button class="standings-delete-btn" data-team-id="${team.id}" data-group-id="${group.id}" title="删除球队">✕</button>
-                                    </div>
-                                `;
-                        });
-                    }
-
-                    html += `
-                                </div>
-                            </div>
-                        `;
-                });
-
-                containerStandings.innerHTML = html;
-                updateStandingsInfo();
-
-                // ---- 事件绑定 ----
-                // 小组名编辑
-                containerStandings.querySelectorAll('.group-name-input').forEach(el => {
-                    el.addEventListener('input', function() {
-                        const groupId = parseInt(this.dataset.groupId);
-                        const group = groups.find(g => g.id === groupId);
-                        if (group) group.groupName = this.value;
-                    });
-                });
-
-                // 删除小组
-                containerStandings.querySelectorAll('.delete-group-btn').forEach(el => {
-                    el.addEventListener('click', function() {
-                        const groupId = parseInt(this.dataset.groupId);
-                        deleteGroup(groupId);
-                    });
-                });
-
-                // 添加球队（小组内）
-                containerStandings.querySelectorAll('.add-team-btn').forEach(el => {
-                    el.addEventListener('click', function() {
-                        const groupId = parseInt(this.dataset.groupId);
-                        addTeamToGroup(groupId);
-                    });
-                });
-
-                // 队标上传
-                containerStandings.querySelectorAll('.logo-wrapper').forEach(el => {
-                    el.addEventListener('click', function(e) {
-                        const teamId = parseInt(this.dataset.teamId);
-                        const groupId = parseInt(this.dataset.groupId);
-                        triggerStandingLogoUpload(groupId, teamId);
-                    });
-                });
-
-                // 队名输入
-                containerStandings.querySelectorAll('.standings-team .team-name-input').forEach(el => {
-                    el.addEventListener('input', function() {
-                        const teamId = parseInt(this.dataset.teamId);
-                        const groupId = parseInt(this.dataset.groupId);
-                        const group = groups.find(g => g.id === groupId);
-                        if (!group) return;
-                        const team = group.teams.find(t => t.id === teamId);
-                        if (team) team.team.name = this.value;
-                    });
-                });
-
-                // 统计输入
-                containerStandings.querySelectorAll('.stat-input').forEach(el => {
-                    el.addEventListener('input', function() {
-                        const teamId = parseInt(this.dataset.teamId);
-                        const groupId = parseInt(this.dataset.groupId);
-                        const statKey = this.dataset.stat;
-                        const group = groups.find(g => g.id === groupId);
-                        if (!group) return;
-                        const team = group.teams.find(t => t.id === teamId);
-                        if (!team) return;
-                        let val = this.value.replace(/[^0-9\-]/g, '');
-                        if (statKey === 'goalDiff' || statKey === 'points') {
-                            // 允许负号
-                        } else {
-                            val = val.replace(/[^0-9]/g, '');
-                        }
-                        this.value = val;
-                        team.stats[statKey] = val;
-                    });
-                    el.addEventListener('keydown', function(e) {
-                        if (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'Tab' ||
-                            e.key === 'ArrowLeft' || e.key === 'ArrowRight' ||
-                            e.key === 'Home' || e.key === 'End') return;
-                        const statKey = this.dataset.stat;
-                        if (statKey === 'goalDiff' || statKey === 'points') {
-                            if (!/^[0-9\-]$/.test(e.key) && e.key !== 'Enter') e.preventDefault();
-                        } else {
-                            if (!/^[0-9]$/.test(e.key) && e.key !== 'Enter') e.preventDefault();
-                        }
-                    });
-                });
-
-                // 删除球队
-                containerStandings.querySelectorAll('.standings-delete-btn').forEach(el => {
-                    el.addEventListener('click', function() {
-                        const teamId = parseInt(this.dataset.teamId);
-                        const groupId = parseInt(this.dataset.groupId);
-                        deleteTeamFromGroup(groupId, teamId);
-                    });
-                });
-            }
-
-            // =====================================================
-            //  积分榜操作（小组、球队）
-            // =====================================================
-            function addGroup(groupName) {
-                const newGroup = {
-                    id: generateGroupId(),
-                    groupName: groupName || '新小组',
-                    teams: []
+                const g2 = {
+                    id: genGroupId(),
+                    groupName: 'B组',
+                    teams: [
+                        createTeamObj('法国', '🇫🇷', { played: '3', win: '1', draw: '1', lose: '1', goalsFor: '3',
+                            goalsAgainst: '3', goalDiff: '0', points: '4' }),
+                        createTeamObj('德国', '🇩🇪', { played: '3', win: '0', draw: '0', lose: '3', goalsFor: '1',
+                            goalsAgainst: '5', goalDiff: '-4', points: '0' }),
+                    ]
                 };
-                groups.push(newGroup);
-                renderStandings();
-                // 滚动到新小组
-                setTimeout(() => {
-                    const lastGroup = containerStandings.querySelector('.group-block:last-child');
-                    if (lastGroup) lastGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 50);
-                return newGroup;
+                return [g1, g2];
             }
 
-            function deleteGroup(groupId) {
-                if (groups.length <= 1) {
-                    alert('至少保留一个小组');
-                    return;
-                }
-                if (!confirm('确定要删除该小组及其所有球队吗？')) return;
-                groups = groups.filter(g => g.id !== groupId);
-                renderStandings();
-            }
-
-            function addTeamToGroup(groupId) {
-                const group = groups.find(g => g.id === groupId);
-                if (!group) return;
-                const newTeam = createTeamObj('新球队', '', {});
-                group.teams.push(newTeam);
-                renderStandings();
-                // 滚动到新球队
-                setTimeout(() => {
-                    const lastRow = containerStandings.querySelector(`.group-block[data-group-id="${groupId}"] .standings-row:last-child`);
-                    if (lastRow) lastRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 50);
-            }
-
-            function deleteTeamFromGroup(groupId, teamId) {
-                const group = groups.find(g => g.id === groupId);
-                if (!group) return;
-                if (group.teams.length <= 1) {
-                    alert('每个小组至少保留一支球队');
-                    return;
-                }
-                if (!confirm('确定要删除该球队吗？')) return;
-                group.teams = group.teams.filter(t => t.id !== teamId);
-                renderStandings();
-            }
-
-            function clearStandings() {
-                if (groups.length === 0) return;
-                if (!confirm('确定要清空所有小组和球队吗？')) return;
-                groups = [];
-                renderStandings();
-            }
-
-            function triggerStandingLogoUpload(groupId, teamId) {
-                const group = groups.find(g => g.id === groupId);
-                if (!group) return;
-                const team = group.teams.find(t => t.id === teamId);
-                if (!team) return;
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = 'image/*';
-                input.style.display = 'none';
-                document.body.appendChild(input);
-                input.addEventListener('change', function() {
-                    if (this.files && this.files[0]) {
-                        const file = this.files[0];
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const dataUrl = e.target.result;
-                            team.team.logo = dataUrl;
-                            team.team.logoType = 'image';
-                            renderStandings();
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                    document.body.removeChild(input);
-                });
-                input.addEventListener('cancel', function() { document.body.removeChild(input); });
-                input.click();
-            }
-
-            function loadExampleGroups() {
-                groups = getExampleGroups();
-                renderStandings();
-            }
-
-            function updateStandingsInfo() {
-                const totalTeams = groups.reduce((acc, g) => acc + g.teams.length, 0);
-                standingsTotalInfo.textContent = `共 ${groups.length} 个小组，${totalTeams} 支球队`;
-            }
-
-            // =====================================================
-            //  切换模式
-            // =====================================================
-            function switchMode(mode) {
-                currentMode = mode;
-                modeTabs.forEach(tab => {
-                    tab.classList.toggle('active', tab.dataset.mode === mode);
-                });
-                panelSchedule.classList.toggle('active', mode === 'schedule');
-                panelStandings.classList.toggle('active', mode === 'standings');
-                updateFooterCount();
-                if (mode === 'standings') {
-                    updateStandingsInfo();
-                }
-            }
-
-            function updateFooterCount() {
-                if (currentMode === 'schedule') {
-                    footerCount.innerHTML = `共 <span>${matches.length}</span> 场比赛`;
-                } else {
-                    const totalTeams = groups.reduce((acc, g) => acc + g.teams.length, 0);
-                    footerCount.innerHTML = `共 <span>${groups.length}</span> 个小组，<span>${totalTeams}</span> 支球队`;
-                }
-            }
-
-            // =====================================================
-            //  导入 / 导出
-            // =====================================================
-            function exportData() {
-                const data = {
-                    tournamentName: tournamentInput.value.trim() || '未命名赛事',
-                    matches: matches.map(m => ({
-                        id: m.id,
-                        leftTeam: { name: m.leftTeam.name, logo: m.leftTeam.logo, logoType: m.leftTeam.logoType },
-                        rightTeam: { name: m.rightTeam.name, logo: m.rightTeam.logo, logoType: m.rightTeam.logoType },
-                        score: { left: m.score.left, right: m.score.right }
-                    })),
-                    groups: groups.map(g => ({
-                        id: g.id,
-                        groupName: g.groupName,
-                        teams: g.teams.map(t => ({
-                            id: t.id,
-                            team: { name: t.team.name, logo: t.team.logo, logoType: t.team.logoType },
-                            stats: { ...t.stats }
-                        }))
-                    }))
-                };
-                const json = JSON.stringify(data, null, 2);
-                const blob = new Blob([json], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                const name = (data.tournamentName || '赛程表') + '.json';
-                a.download = name;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            }
-
-            function importData(jsonStr) {
+            // ============ 持久化 ============
+            function saveData() {
                 try {
-                    const data = JSON.parse(jsonStr);
-                    if (!data.matches || !Array.isArray(data.matches)) {
-                        alert('无效的数据格式：缺少 matches 数组');
-                        return;
-                    }
-                    if (data.tournamentName) {
-                        tournamentInput.value = data.tournamentName;
-                    }
-                    // 导入赛程
-                    const newMatches = data.matches.map(m => ({
-                        id: generateMatchId(),
-                        leftTeam: {
-                            name: m.leftTeam?.name || '',
-                            logo: m.leftTeam?.logo || '',
-                            logoType: m.leftTeam?.logoType || (m.leftTeam?.logo ? 'image' : 'emoji')
-                        },
-                        rightTeam: {
-                            name: m.rightTeam?.name || '',
-                            logo: m.rightTeam?.logo || '',
-                            logoType: m.rightTeam?.logoType || (m.rightTeam?.logo ? 'image' : 'emoji')
-                        },
+                    const data = {
+                        tournamentName: tournamentInput.value.trim() || '赛事',
+                        matches: matches.map(m => ({
+                            id: m.id,
+                            leftTeam: { name: m.leftTeam.name, logo: m.leftTeam.logo, logoType: m.leftTeam
+                                    .logoType },
+                            rightTeam: { name: m.rightTeam.name, logo: m.rightTeam.logo, logoType: m.rightTeam
+                                    .logoType },
+                            score: { left: m.score.left, right: m.score.right }
+                        })),
+                        groups: groups.map(g => ({
+                            id: g.id,
+                            groupName: g.groupName,
+                            teams: g.teams.map(t => ({
+                                id: t.id,
+                                team: { name: t.team.name, logo: t.team.logo, logoType: t.team.logoType },
+                                stats: { ...t.stats }
+                            }))
+                        })),
+                        bracket: bracketData.map(r => ({
+                            label: r.label,
+                            matches: r.matches.map(m => ({
+                                left: { name: m.left.name, logo: m.left.logo, logoType: m.left.logoType },
+                                right: { name: m.right.name, logo: m.right.logo, logoType: m.right
+                                        .logoType },
+                                score: { left: m.score.left, right: m.score.right }
+                            }))
+                        })),
+                        nextMatchId: nextMatchId,
+                        nextGroupId: nextGroupId,
+                        nextTeamId: nextTeamId,
+                    };
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                    showSaveToast();
+                } catch (e) {
+                    console.warn('保存失败:', e);
+                }
+            }
+
+            function loadData() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (!raw) return false;
+                    const data = JSON.parse(raw);
+                    if (!data.matches || !Array.isArray(data.matches)) return false;
+
+                    // 恢复赛事名称
+                    if (data.tournamentName) tournamentInput.value = data.tournamentName;
+
+                    // 恢复 matches
+                    matches = data.matches.map(m => ({
+                        id: m.id,
+                        leftTeam: { name: m.leftTeam?.name || '', logo: m.leftTeam?.logo || '', logoType: m
+                                .leftTeam?.logoType || 'emoji' },
+                        rightTeam: { name: m.rightTeam?.name || '', logo: m.rightTeam?.logo || '',
+                            logoType: m.rightTeam?.logoType || 'emoji' },
                         score: { left: m.score?.left || '', right: m.score?.right || '' }
                     }));
 
-                    // 导入积分榜（小组结构）
-                    let newGroups = [];
+                    // 恢复 groups
                     if (data.groups && Array.isArray(data.groups)) {
-                        newGroups = data.groups.map(g => ({
-                            id: generateGroupId(),
+                        groups = data.groups.map(g => ({
+                            id: g.id || genGroupId(),
                             groupName: g.groupName || '小组',
                             teams: (g.teams || []).map(t => ({
-                                id: generateTeamId(),
-                                team: {
-                                    name: t.team?.name || '',
-                                    logo: t.team?.logo || '',
-                                    logoType: t.team?.logoType || (t.team?.logo ? 'image' : 'emoji')
-                                },
+                                id: t.id || genTeamId(),
+                                team: { name: t.team?.name || '', logo: t.team?.logo || '', logoType: t
+                                        .team?.logoType || 'emoji' },
                                 stats: {
                                     played: t.stats?.played || '0',
                                     win: t.stats?.win || '0',
@@ -1596,110 +949,713 @@
                                 }
                             }))
                         }));
+                    } else {
+                        groups = [];
                     }
 
-                    if (newMatches.length === 0 && newGroups.length === 0) {
-                        alert('没有导入任何数据');
-                        return;
+                    // 恢复 bracket
+                    if (data.bracket && Array.isArray(data.bracket)) {
+                        bracketData = data.bracket.map(r => ({
+                            label: r.label || '轮次',
+                            matches: (r.matches || []).map(m => ({
+                                left: { name: m.left?.name || '', logo: m.left?.logo || '',
+                                    logoType: m.left?.logoType || 'emoji' },
+                                right: { name: m.right?.name || '', logo: m.right?.logo || '',
+                                    logoType: m.right?.logoType || 'emoji' },
+                                score: { left: m.score?.left || '', right: m.score?.right || '' }
+                            }))
+                        }));
+                    } else {
+                        bracketData = getDefaultBracket();
                     }
-                    if (matches.length > 0 || groups.length > 0) {
-                        if (!confirm(`当前有 ${matches.length} 场比赛和 ${groups.length} 个小组，导入将覆盖所有数据，确定继续吗？`)) return;
-                    }
-                    matches = newMatches;
-                    groups = newGroups;
-                    renderMatches();
-                    renderStandings();
-                    alert(`成功导入 ${matches.length} 场比赛和 ${groups.length} 个小组！`);
+
+                    // 恢复 ID 计数器
+                    if (data.nextMatchId) nextMatchId = data.nextMatchId;
+                    if (data.nextGroupId) nextGroupId = data.nextGroupId;
+                    if (data.nextTeamId) nextTeamId = data.nextTeamId;
+
+                    return true;
                 } catch (e) {
-                    alert('导入失败：请检查 JSON 格式是否正确\n' + e.message);
+                    console.warn('加载数据失败:', e);
+                    return false;
                 }
             }
 
-            // =====================================================
-            //  初始化
-            // =====================================================
-            function init() {
-                // 加载示例数据
-                matches = getExampleMatches();
-                groups = getExampleGroups();
-                renderMatches();
-                renderStandings();
-                switchMode('schedule');
+            let saveTimer = null;
 
-                // 事件绑定
-                modeTabs.forEach(tab => {
-                    tab.addEventListener('click', function() {
-                        switchMode(this.dataset.mode);
+            function autoSave() {
+                clearTimeout(saveTimer);
+                saveTimer = setTimeout(() => {
+                    saveData();
+                }, 300);
+            }
+
+            let toastTimer = null;
+
+            function showSaveToast() {
+                saveToast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    saveToast.classList.remove('show');
+                }, 1500);
+            }
+
+            // ============ 渲染：赛程表 ============
+            function renderMatches() {
+                if (matches.length === 0) {
+                    containerMatches.innerHTML = `<div class="empty-state"><div class="empty-icon">📋</div><h3>暂无比赛</h3><p>点击「添加比赛」或「示例」</p></div>`;
+                    matchCountSpan.textContent = '0';
+                    updateFooter();
+                    return;
+                }
+                let html = '';
+                matches.forEach((m, idx) => {
+                    const isFirst = idx === 0;
+                    const leftLogo = m.leftTeam.logo || '';
+                    const rightLogo = m.rightTeam.logo || '';
+                    const lType = m.leftTeam.logoType || 'emoji';
+                    const rType = m.rightTeam.logoType || 'emoji';
+                    let lHtml = lType === 'emoji' && leftLogo ? `<span class="logo-emoji">${leftLogo}</span>` :
+                        leftLogo ? `<img src="${leftLogo}" alt="" />` :
+                        `<span class="logo-placeholder">⬜</span>`;
+                    let rHtml = rType === 'emoji' && rightLogo ? `<span class="logo-emoji">${rightLogo}</span>` :
+                        rightLogo ? `<img src="${rightLogo}" alt="" />` :
+                        `<span class="logo-placeholder">⬜</span>`;
+                    html += `
+                        <div class="match-item" data-match-id="${m.id}">
+                            <div class="divider ${isFirst ? 'divider-thick' : ''}"></div>
+                            <div class="match-content">
+                                <div class="team-block left">
+                                    <div class="logo-wrapper" data-team="left" data-match-id="${m.id}">${lHtml}<span class="upload-hint">上传</span></div>
+                                    <input class="team-name-input" data-team="left" data-match-id="${m.id}" value="${escapeHtml(m.leftTeam.name)}" placeholder="队伍" />
+                                </div>
+                                <div class="score-block">
+                                    <input class="score-input" data-side="left" data-match-id="${m.id}" value="${escapeHtml(m.score.left)}" placeholder="0" maxlength="3" />
+                                    <span class="score-dash">—</span>
+                                    <input class="score-input" data-side="right" data-match-id="${m.id}" value="${escapeHtml(m.score.right)}" placeholder="0" maxlength="3" />
+                                </div>
+                                <div class="team-block right">
+                                    <div class="logo-wrapper" data-team="right" data-match-id="${m.id}">${rHtml}<span class="upload-hint">上传</span></div>
+                                    <input class="team-name-input" data-team="right" data-match-id="${m.id}" value="${escapeHtml(m.rightTeam.name)}" placeholder="队伍" />
+                                </div>
+                                <button class="match-delete-btn" data-match-id="${m.id}">✕</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `<div class="divider divider-thick"></div>`;
+                containerMatches.innerHTML = html;
+                matchCountSpan.textContent = matches.length;
+                updateFooter();
+
+                containerMatches.querySelectorAll('.logo-wrapper').forEach(el => {
+                    el.addEventListener('click', function(e) {
+                        const mid = parseInt(this.dataset.matchId);
+                        const team = this.dataset.team;
+                        triggerMatchLogoUpload(mid, team);
                     });
                 });
-
-                addMatchBtn.addEventListener('click', function() {
-                    addMatch('队伍', '队伍', '', '', '', '');
-                    setTimeout(() => {
-                        const last = containerMatches.querySelector('.match-item:last-child');
-                        if (last) last.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 50);
+                containerMatches.querySelectorAll('.team-name-input').forEach(el => {
+                    el.addEventListener('input', function() {
+                        const mid = parseInt(this.dataset.matchId);
+                        const team = this.dataset.team;
+                        const m = matches.find(x => x.id === mid);
+                        if (!m) return;
+                        if (team === 'left') m.leftTeam.name = this.value;
+                        else m.rightTeam.name = this.value;
+                        autoSave();
+                    });
                 });
-
-                exampleBtn.addEventListener('click', function() {
-                    if (matches.length > 0) {
-                        if (!confirm('当前有比赛数据，加载示例将覆盖，确定继续吗？')) return;
-                    }
-                    loadExampleMatches();
+                containerMatches.querySelectorAll('.score-input').forEach(el => {
+                    el.addEventListener('input', function() {
+                        const mid = parseInt(this.dataset.matchId);
+                        const side = this.dataset.side;
+                        const m = matches.find(x => x.id === mid);
+                        if (!m) return;
+                        let val = this.value.replace(/[^0-9]/g, '');
+                        if (val.length > 3) val = val.slice(0, 3);
+                        this.value = val;
+                        if (side === 'left') m.score.left = val;
+                        else m.score.right = val;
+                        autoSave();
+                    });
+                    el.addEventListener('keydown', function(e) {
+                        if (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'Tab' ||
+                            e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'Home' || e.key ===
+                            'End') return;
+                        if (!/^[0-9]$/.test(e.key) && e.key !== 'Enter') e.preventDefault();
+                    });
                 });
-
-                clearAllBtn.addEventListener('click', clearAllMatches);
-
-                addGroupBtn.addEventListener('click', function() {
-                    addGroup('新小组');
+                containerMatches.querySelectorAll('.match-delete-btn').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const mid = parseInt(this.dataset.matchId);
+                        if (!confirm('删除这场比赛？')) return;
+                        matches = matches.filter(x => x.id !== mid);
+                        renderMatches();
+                        autoSave();
+                    });
                 });
+            }
 
-                clearStandingsBtn.addEventListener('click', clearStandings);
-
-                exportBtn.addEventListener('click', exportData);
-
-                importBtn.addEventListener('click', function() {
-                    importFileInput.click();
-                });
-
-                importFileInput.addEventListener('change', function() {
+            function triggerMatchLogoUpload(matchId, team) {
+                const m = matches.find(x => x.id === matchId);
+                if (!m) return;
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.style.display = 'none';
+                document.body.appendChild(input);
+                input.addEventListener('change', function() {
                     if (this.files && this.files[0]) {
                         const reader = new FileReader();
                         reader.onload = function(e) {
-                            importData(e.target.result);
-                            importFileInput.value = '';
+                            const url = e.target.result;
+                            if (team === 'left') { m.leftTeam.logo = url;
+                                m.leftTeam.logoType = 'image'; } else { m.rightTeam.logo = url;
+                                m.rightTeam.logoType = 'image'; }
+                            renderMatches();
+                            autoSave();
                         };
-                        reader.onerror = function() {
-                            alert('读取文件失败');
-                            importFileInput.value = '';
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                    document.body.removeChild(input);
+                });
+                input.addEventListener('cancel', function() { document.body.removeChild(input); });
+                input.click();
+            }
+
+            // ============ 渲染：积分榜 ============
+            function renderStandings() {
+                if (groups.length === 0) {
+                    containerStandings.innerHTML =
+                        `<div class="empty-state"><div class="empty-icon">📊</div><h3>积分榜为空</h3><p>点击「添加小组」</p></div>`;
+                    updateStandingsInfo();
+                    return;
+                }
+                let html = '';
+                groups.forEach((g, gi) => {
+                    html += `<div class="group-block" data-group-id="${g.id}">
+                        <div class="group-header">
+                            <input class="group-name-input" data-group-id="${g.id}" value="${escapeHtml(g.groupName)}" placeholder="小组名" />
+                            <div class="group-actions">
+                                <button class="btn btn-success btn-sm add-team-btn" data-group-id="${g.id}">➕ 添加球队</button>
+                                <button class="btn btn-danger btn-sm delete-group-btn" data-group-id="${g.id}">🗑 删除小组</button>
+                            </div>
+                        </div>
+                        <div class="group-teams">`;
+                    if (g.teams.length === 0) {
+                        html += `<div class="group-empty">暂无球队</div>`;
+                    } else {
+                        g.teams.forEach((t, ti) => {
+                            const isFirst = ti === 0;
+                            const logo = t.team.logo || '';
+                            const lType = t.team.logoType || 'emoji';
+                            let lHtml = lType === 'emoji' && logo ? `<span class="logo-emoji">${logo}</span>` :
+                                logo ? `<img src="${logo}" alt="" />` :
+                                `<span class="logo-placeholder">⬜</span>`;
+                            html += `
+                                <div class="standings-row" data-team-id="${t.id}">
+                                    <div class="standings-divider ${isFirst ? 'standings-divider-top' : ''}"></div>
+                                    <div class="standings-rank">${ti+1}</div>
+                                    <div class="standings-team">
+                                        <div class="logo-wrapper" data-team-id="${t.id}" data-group-id="${g.id}">${lHtml}<span class="upload-hint">上传</span></div>
+                                        <input class="team-name-input" data-team-id="${t.id}" data-group-id="${g.id}" value="${escapeHtml(t.team.name)}" placeholder="球队" />
+                                    </div>
+                                    <div class="standings-stats">
+                                        ${['played','win','draw','lose','goalsFor','goalsAgainst','goalDiff','points'].map(s => `
+                                            <div class="stat-item">
+                                                <span class="stat-label">${s==='played'?'场':s==='win'?'胜':s==='draw'?'平':s==='lose'?'负':s==='goalsFor'?'进':s==='goalsAgainst'?'失':s==='goalDiff'?'净胜':'积分'}</span>
+                                                <input type="${s==='goalDiff'?'text':'number'}" class="stat-input" data-stat="${s}" data-team-id="${t.id}" data-group-id="${g.id}" value="${t.stats[s]}" ${s!=='goalDiff'?'min="0"':''} />
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                    <button class="standings-delete-btn" data-team-id="${t.id}" data-group-id="${g.id}">✕</button>
+                                </div>
+                            `;
+                        });
+                    }
+                    html += `</div></div>`;
+                });
+                containerStandings.innerHTML = html;
+                updateStandingsInfo();
+
+                containerStandings.querySelectorAll('.group-name-input').forEach(el => {
+                    el.addEventListener('input', function() {
+                        const gid = parseInt(this.dataset.groupId);
+                        const g = groups.find(x => x.id === gid);
+                        if (g) g.groupName = this.value;
+                        autoSave();
+                    });
+                });
+                containerStandings.querySelectorAll('.delete-group-btn').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const gid = parseInt(this.dataset.groupId);
+                        if (groups.length <= 1) { alert('至少保留一个小组'); return; }
+                        if (!confirm('删除该小组？')) return;
+                        groups = groups.filter(x => x.id !== gid);
+                        renderStandings();
+                        autoSave();
+                    });
+                });
+                containerStandings.querySelectorAll('.add-team-btn').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const gid = parseInt(this.dataset.groupId);
+                        const g = groups.find(x => x.id === gid);
+                        if (!g) return;
+                        g.teams.push(createTeamObj('新球队', '', {}));
+                        renderStandings();
+                        autoSave();
+                    });
+                });
+                containerStandings.querySelectorAll('.logo-wrapper').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const tid = parseInt(this.dataset.teamId);
+                        const gid = parseInt(this.dataset.groupId);
+                        triggerStandingLogoUpload(gid, tid);
+                    });
+                });
+                containerStandings.querySelectorAll('.standings-team .team-name-input').forEach(el => {
+                    el.addEventListener('input', function() {
+                        const tid = parseInt(this.dataset.teamId);
+                        const gid = parseInt(this.dataset.groupId);
+                        const g = groups.find(x => x.id === gid);
+                        if (!g) return;
+                        const t = g.teams.find(x => x.id === tid);
+                        if (t) t.team.name = this.value;
+                        autoSave();
+                    });
+                });
+                containerStandings.querySelectorAll('.stat-input').forEach(el => {
+                    el.addEventListener('input', function() {
+                        const tid = parseInt(this.dataset.teamId);
+                        const gid = parseInt(this.dataset.groupId);
+                        const stat = this.dataset.stat;
+                        const g = groups.find(x => x.id === gid);
+                        if (!g) return;
+                        const t = g.teams.find(x => x.id === tid);
+                        if (!t) return;
+                        let raw = this.value;
+                        if (stat === 'goalDiff') {
+                            let filtered = raw.replace(/[^0-9\-]/g, '');
+                            if (filtered.indexOf('-') > 0) filtered = filtered.replace(/-/g, '');
+                            const parts = filtered.split('-');
+                            if (parts.length > 2) filtered = '-' + parts.slice(1).join('');
+                            this.value = filtered;
+                            t.stats[stat] = filtered;
+                        } else {
+                            let filtered = raw.replace(/[^0-9]/g, '');
+                            this.value = filtered;
+                            t.stats[stat] = filtered;
+                        }
+                        autoSave();
+                    });
+                    el.addEventListener('keydown', function(e) {
+                        const stat = this.dataset.stat;
+                        if (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'Tab' ||
+                            e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'Home' || e.key ===
+                            'End' || e.key === 'Enter') return;
+                        if (stat === 'goalDiff') {
+                            const isMinus = e.key === '-' || e.key === 'Minus' || e.code === 'Minus' || e
+                            .code === 'NumpadSubtract';
+                            if (isMinus || /^[0-9]$/.test(e.key)) return;
+                            e.preventDefault();
+                        } else {
+                            if (/^[0-9]$/.test(e.key)) return;
+                            e.preventDefault();
+                        }
+                    });
+                });
+                containerStandings.querySelectorAll('.standings-delete-btn').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const tid = parseInt(this.dataset.teamId);
+                        const gid = parseInt(this.dataset.groupId);
+                        const g = groups.find(x => x.id === gid);
+                        if (!g) return;
+                        if (g.teams.length <= 1) { alert('至少保留一支球队'); return; }
+                        if (!confirm('删除该球队？')) return;
+                        g.teams = g.teams.filter(x => x.id !== tid);
+                        renderStandings();
+                        autoSave();
+                    });
+                });
+            }
+
+            function triggerStandingLogoUpload(groupId, teamId) {
+                const g = groups.find(x => x.id === groupId);
+                if (!g) return;
+                const t = g.teams.find(x => x.id === teamId);
+                if (!t) return;
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.style.display = 'none';
+                document.body.appendChild(input);
+                input.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            t.team.logo = e.target.result;
+                            t.team.logoType = 'image';
+                            renderStandings();
+                            autoSave();
                         };
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                    document.body.removeChild(input);
+                });
+                input.addEventListener('cancel', function() { document.body.removeChild(input); });
+                input.click();
+            }
+
+            function updateStandingsInfo() {
+                const total = groups.reduce((acc, g) => acc + g.teams.length, 0);
+                standingsTotalInfo.textContent = `共 ${groups.length} 个小组，${total} 支球队`;
+            }
+
+            // ============ 渲染：淘汰赛赛程 ============
+            function renderBracket() {
+                if (!bracketData || bracketData.length === 0) {
+                    bracketData = getDefaultBracket();
+                }
+                let html = `<div class="bracket">`;
+                bracketData.forEach((round, ri) => {
+                    html += `<div class="bracket-round">
+                        <div class="round-label">${escapeHtml(round.label)}</div>`;
+                    round.matches.forEach((m, mi) => {
+                        const lLogo = m.left.logo || '';
+                        const rLogo = m.right.logo || '';
+                        const lType = m.left.logoType || 'emoji';
+                        const rType = m.right.logoType || 'emoji';
+                        let lHtml = lType === 'emoji' && lLogo ? `<span class="logo-emoji">${lLogo}</span>` :
+                            lLogo ? `<img src="${lLogo}" alt="" />` :
+                            `<span class="logo-placeholder">⬜</span>`;
+                        let rHtml = rType === 'emoji' && rLogo ? `<span class="logo-emoji">${rLogo}</span>` :
+                            rLogo ? `<img src="${rLogo}" alt="" />` :
+                            `<span class="logo-placeholder">⬜</span>`;
+
+                        html += `<div class="bracket-match" data-round="${ri}" data-match="${mi}">
+                            <div class="bracket-team left">
+                                <div class="logo-wrapper" data-bracket="left" data-round="${ri}" data-match="${mi}">${lHtml}<span class="upload-hint">上传</span></div>
+                                <input class="team-name-input" data-bracket="left" data-round="${ri}" data-match="${mi}" value="${escapeHtml(m.left.name)}" placeholder="队伍" />
+                            </div>
+                            <div class="bracket-score">
+                                <input class="score-input" data-bracket-score="left" data-round="${ri}" data-match="${mi}" value="${escapeHtml(m.score.left)}" placeholder="0" maxlength="3" />
+                                <span class="score-dash">—</span>
+                                <input class="score-input" data-bracket-score="right" data-round="${ri}" data-match="${mi}" value="${escapeHtml(m.score.right)}" placeholder="0" maxlength="3" />
+                            </div>
+                            <div class="bracket-team right">
+                                <div class="logo-wrapper" data-bracket="right" data-round="${ri}" data-match="${mi}">${rHtml}<span class="upload-hint">上传</span></div>
+                                <input class="team-name-input" data-bracket="right" data-round="${ri}" data-match="${mi}" value="${escapeHtml(m.right.name)}" placeholder="队伍" />
+                            </div>
+                        </div>`;
+                    });
+                    html += `</div>`;
+                });
+                html += `</div>`;
+                containerBracket.innerHTML = html;
+
+                containerBracket.querySelectorAll('.logo-wrapper').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const round = parseInt(this.dataset.round);
+                        const match = parseInt(this.dataset.match);
+                        const side = this.dataset.bracket;
+                        triggerBracketLogoUpload(round, match, side);
+                    });
+                });
+                containerBracket.querySelectorAll('.bracket-team .team-name-input').forEach(el => {
+                    el.addEventListener('input', function() {
+                        const round = parseInt(this.dataset.round);
+                        const match = parseInt(this.dataset.match);
+                        const side = this.dataset.bracket;
+                        const m = bracketData[round]?.matches[match];
+                        if (!m) return;
+                        if (side === 'left') m.left.name = this.value;
+                        else m.right.name = this.value;
+                        autoSave();
+                    });
+                });
+                containerBracket.querySelectorAll('.bracket-score .score-input').forEach(el => {
+                    el.addEventListener('input', function() {
+                        const round = parseInt(this.dataset.round);
+                        const match = parseInt(this.dataset.match);
+                        const side = this.dataset.bracketScore;
+                        const m = bracketData[round]?.matches[match];
+                        if (!m) return;
+                        let val = this.value.replace(/[^0-9]/g, '');
+                        if (val.length > 3) val = val.slice(0, 3);
+                        this.value = val;
+                        if (side === 'left') m.score.left = val;
+                        else m.score.right = val;
+                        autoSave();
+                    });
+                    el.addEventListener('keydown', function(e) {
+                        if (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'Tab' ||
+                            e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'Home' || e.key ===
+                            'End') return;
+                        if (!/^[0-9]$/.test(e.key) && e.key !== 'Enter') e.preventDefault();
+                    });
+                });
+            }
+
+            function triggerBracketLogoUpload(round, match, side) {
+                const m = bracketData[round]?.matches[match];
+                if (!m) return;
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.style.display = 'none';
+                document.body.appendChild(input);
+                input.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const url = e.target.result;
+                            if (side === 'left') { m.left.logo = url;
+                                m.left.logoType = 'image'; } else { m.right.logo = url;
+                                m.right.logoType = 'image'; }
+                            renderBracket();
+                            autoSave();
+                        };
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                    document.body.removeChild(input);
+                });
+                input.addEventListener('cancel', function() { document.body.removeChild(input); });
+                input.click();
+            }
+
+            // ============ 操作 ============
+            function addMatch() {
+                matches.push({
+                    id: genMatchId(),
+                    leftTeam: { name: '队伍', logo: '', logoType: 'emoji' },
+                    rightTeam: { name: '队伍', logo: '', logoType: 'emoji' },
+                    score: { left: '', right: '' }
+                });
+                renderMatches();
+                autoSave();
+            }
+
+            function resetExample() {
+                if (matches.length > 0 && !confirm('覆盖当前赛程？')) return;
+                matches = getExampleMatches();
+                groups = getExampleGroups();
+                bracketData = getDefaultBracket();
+                renderMatches();
+                renderStandings();
+                renderBracket();
+                autoSave();
+            }
+
+            function clearMatches() {
+                if (matches.length === 0) return;
+                if (!confirm('清空所有比赛？')) return;
+                matches = [];
+                renderMatches();
+                autoSave();
+            }
+
+            function addGroup() {
+                groups.push({ id: genGroupId(), groupName: '新小组', teams: [] });
+                renderStandings();
+                autoSave();
+            }
+
+            function clearStandings() {
+                if (groups.length === 0) return;
+                if (!confirm('清空积分榜？')) return;
+                groups = [];
+                renderStandings();
+                autoSave();
+            }
+
+            function resetBracket() {
+                bracketData = getDefaultBracket();
+                renderBracket();
+                autoSave();
+            }
+
+            // ============ 导入导出 ============
+            function exportData() {
+                const data = {
+                    tournamentName: tournamentInput.value.trim() || '赛事',
+                    matches: matches.map(m => ({
+                        id: m.id,
+                        leftTeam: { name: m.leftTeam.name, logo: m.leftTeam.logo, logoType: m.leftTeam.logoType },
+                        rightTeam: { name: m.rightTeam.name, logo: m.rightTeam.logo, logoType: m.rightTeam
+                                .logoType },
+                        score: { left: m.score.left, right: m.score.right }
+                    })),
+                    groups: groups.map(g => ({
+                        id: g.id,
+                        groupName: g.groupName,
+                        teams: g.teams.map(t => ({
+                            id: t.id,
+                            team: { name: t.team.name, logo: t.team.logo, logoType: t.team.logoType },
+                            stats: { ...t.stats }
+                        }))
+                    })),
+                    bracket: bracketData.map(r => ({
+                        label: r.label,
+                        matches: r.matches.map(m => ({
+                            left: { name: m.left.name, logo: m.left.logo, logoType: m.left.logoType },
+                            right: { name: m.right.name, logo: m.right.logo, logoType: m.right.logoType },
+                            score: { left: m.score.left, right: m.score.right }
+                        }))
+                    })),
+                    nextMatchId: nextMatchId,
+                    nextGroupId: nextGroupId,
+                    nextTeamId: nextTeamId,
+                };
+                const json = JSON.stringify(data, null, 2);
+                const blob = new Blob([json], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = (data.tournamentName || '赛程') + '.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            function importData(jsonStr) {
+                try {
+                    const data = JSON.parse(jsonStr);
+                    if (!data.matches || !Array.isArray(data.matches)) { alert('无效格式'); return; }
+                    if (data.tournamentName) tournamentInput.value = data.tournamentName;
+                    matches = data.matches.map(m => ({
+                        id: m.id || genMatchId(),
+                        leftTeam: { name: m.leftTeam?.name || '', logo: m.leftTeam?.logo || '', logoType: m
+                                .leftTeam?.logoType || 'emoji' },
+                        rightTeam: { name: m.rightTeam?.name || '', logo: m.rightTeam?.logo || '',
+                            logoType: m.rightTeam?.logoType || 'emoji' },
+                        score: { left: m.score?.left || '', right: m.score?.right || '' }
+                    }));
+                    if (data.groups && Array.isArray(data.groups)) {
+                        groups = data.groups.map(g => ({
+                            id: g.id || genGroupId(),
+                            groupName: g.groupName || '小组',
+                            teams: (g.teams || []).map(t => ({
+                                id: t.id || genTeamId(),
+                                team: { name: t.team?.name || '', logo: t.team?.logo || '', logoType: t
+                                        .team?.logoType || 'emoji' },
+                                stats: {
+                                    played: t.stats?.played || '0',
+                                    win: t.stats?.win || '0',
+                                    draw: t.stats?.draw || '0',
+                                    lose: t.stats?.lose || '0',
+                                    goalsFor: t.stats?.goalsFor || '0',
+                                    goalsAgainst: t.stats?.goalsAgainst || '0',
+                                    goalDiff: t.stats?.goalDiff || '0',
+                                    points: t.stats?.points || '0'
+                                }
+                            }))
+                        }));
+                    } else { groups = []; }
+                    if (data.bracket && Array.isArray(data.bracket)) {
+                        bracketData = data.bracket.map(r => ({
+                            label: r.label || '轮次',
+                            matches: (r.matches || []).map(m => ({
+                                left: { name: m.left?.name || '', logo: m.left?.logo || '',
+                                    logoType: m.left?.logoType || 'emoji' },
+                                right: { name: m.right?.name || '', logo: m.right?.logo || '',
+                                    logoType: m.right?.logoType || 'emoji' },
+                                score: { left: m.score?.left || '', right: m.score?.right || '' }
+                            }))
+                        }));
+                    } else { bracketData = getDefaultBracket(); }
+                    if (data.nextMatchId) nextMatchId = data.nextMatchId;
+                    if (data.nextGroupId) nextGroupId = data.nextGroupId;
+                    if (data.nextTeamId) nextTeamId = data.nextTeamId;
+                    renderMatches();
+                    renderStandings();
+                    renderBracket();
+                    autoSave();
+                    alert('导入成功！');
+                } catch (e) { alert('导入失败: ' + e.message); }
+            }
+
+            // ============ 切换模式 ============
+            function switchMode(mode) {
+                currentMode = mode;
+                modeTabs.forEach(tab => tab.classList.toggle('active', tab.dataset.mode === mode));
+                panelSchedule.classList.toggle('active', mode === 'schedule');
+                panelStandings.classList.toggle('active', mode === 'standings');
+                panelBracket.classList.toggle('active', mode === 'bracket');
+                updateFooter();
+                if (mode === 'standings') updateStandingsInfo();
+                if (mode === 'bracket') renderBracket();
+            }
+
+            function updateFooter() {
+                if (currentMode === 'schedule') {
+                    footerInfo.innerHTML = `共 <span>${matches.length}</span> 场比赛`;
+                } else if (currentMode === 'standings') {
+                    const total = groups.reduce((acc, g) => acc + g.teams.length, 0);
+                    footerInfo.innerHTML = `共 <span>${groups.length}</span> 个小组，<span>${total}</span> 支球队`;
+                } else {
+                    const total = bracketData.reduce((acc, r) => acc + r.matches.length, 0);
+                    footerInfo.innerHTML = `共 <span>${total}</span> 场淘汰赛`;
+                }
+            }
+
+            // ============ 初始化 ============
+            function init() {
+                // 尝试加载数据
+                const hasSaved = loadData();
+
+                if (!hasSaved) {
+                    // 无保存数据，使用示例
+                    matches = getExampleMatches();
+                    groups = getExampleGroups();
+                    bracketData = getDefaultBracket();
+                }
+
+                renderMatches();
+                renderStandings();
+                renderBracket();
+                switchMode('schedule');
+
+                // 监听赛事名称变化
+                tournamentInput.addEventListener('input', autoSave);
+
+                // 页面关闭前保存
+                window.addEventListener('beforeunload', function() {
+                    saveData();
+                });
+
+                // 事件绑定
+                modeTabs.forEach(tab => tab.addEventListener('click', function() { switchMode(this.dataset.mode); }));
+                addMatchBtn.addEventListener('click', addMatch);
+                resetExampleBtn.addEventListener('click', resetExample);
+                clearMatchesBtn.addEventListener('click', clearMatches);
+                addGroupBtn.addEventListener('click', addGroup);
+                clearStandingsBtn.addEventListener('click', clearStandings);
+                resetBracketBtn.addEventListener('click', resetBracket);
+                exportBtn.addEventListener('click', exportData);
+                importBtn.addEventListener('click', () => importFileInput.click());
+                importFileInput.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) { importData(e.target.result);
+                            importFileInput.value = ''; };
+                        reader.onerror = function() { alert('读取失败');
+                            importFileInput.value = ''; };
                         reader.readAsText(this.files[0]);
                     }
                 });
-
-                printBtn.addEventListener('click', function() {
-                    window.print();
-                });
-
-                document.addEventListener('keydown', function(e) {
-                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                        if (currentMode === 'schedule') {
-                            e.preventDefault();
-                            addMatchBtn.click();
-                        }
+                printBtn.addEventListener('click', () => window.print());
+                document.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && currentMode === 'schedule') {
+                        e.preventDefault();
+                        addMatch();
                     }
                 });
-
-                setTimeout(() => {
-                    tournamentInput.focus();
-                    tournamentInput.setSelectionRange(tournamentInput.value.length, tournamentInput.value.length);
-                }, 100);
+                setTimeout(() => tournamentInput.focus(), 100);
             }
-
             init();
-
         })();
     </script>
-
 </body>
 </html>
